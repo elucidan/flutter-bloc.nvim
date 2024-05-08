@@ -1,11 +1,12 @@
 local bloc = {}
 local util = require("flutter-bloc.util")
 
-bloc.create_bloc_template = function(bloc_name)
-    local snake_case_name = util.camel_to_snake(bloc_name)
+bloc.create_bloc_template = function(bloc_candidate_name)
+	local snake_case_name = util.camel_to_snake(bloc_candidate_name)
 
-    local template = string.format(
-        [[
+	local bloc_name = util.init_cap(bloc_candidate_name)
+	local template = string.format(
+		[[
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,24 +21,24 @@ class %sBloc extends Bloc<%sEvent, %sState> {
   }
 }
 ]],
-        snake_case_name,
-        snake_case_name,
-        bloc_name,
-        bloc_name,
-        bloc_name,
-        bloc_name,
-        bloc_name,
-        bloc_name
-    )
+		snake_case_name,
+		snake_case_name,
+		bloc_name,
+		bloc_name,
+		bloc_name,
+		bloc_name,
+		bloc_name,
+		bloc_name
+	)
 
-    return template
+	return template
 end
 
 bloc.create_event_template = function(bloc_name)
-    local snake_case_name = util.camel_to_snake(bloc_name)
+	local snake_case_name = util.camel_to_snake(bloc_name)
 
-    local template = string.format(
-        [[
+	local template = string.format(
+		[[
 part of '%s_bloc.dart';
 
 sealed class %sEvent extends Equatable {
@@ -47,19 +48,19 @@ sealed class %sEvent extends Equatable {
   List<Object> get props => [];
 }
 ]],
-        snake_case_name,
-        bloc_name,
-        bloc_name
-    )
+		snake_case_name,
+		bloc_name,
+		bloc_name
+	)
 
-    return template
+	return template
 end
 
 bloc.create_bloc_state_template = function(bloc_name)
-    local snake_case_name = util.camel_to_snake(bloc_name)
+	local snake_case_name = util.camel_to_snake(bloc_name)
 
-    local template = string.format(
-        [[
+	local template = string.format(
+		[[
 part of '%s_bloc.dart';
 
 sealed class %sState extends Equatable {
@@ -71,23 +72,22 @@ sealed class %sState extends Equatable {
 
 final class %sInitial extends %sState {}
 ]],
-        snake_case_name,
-        bloc_name,
-        bloc_name,
-        bloc_name,
-        bloc_name
-    )
+		snake_case_name,
+		bloc_name,
+		bloc_name,
+		bloc_name,
+		bloc_name
+	)
 
-    return template
+	return template
 end
-
 
 -- Cubit templates
 bloc.create_cubit_template = function(bloc_name)
-    local snake_case_name = util.camel_to_snake(bloc_name)
+	local snake_case_name = util.camel_to_snake(bloc_name)
 
-    local template = string.format(
-        [[
+	local template = string.format(
+		[[
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -97,24 +97,24 @@ class %sCubit extends Cubit<%sState> {
   %sCubit() : super(%sInitial());
 }
 ]],
-        snake_case_name,
-        bloc_name,
-        bloc_name,
-        bloc_name,
-        bloc_name,
-        bloc_name,
-        bloc_name,
-        bloc_name
-    )
+		snake_case_name,
+		bloc_name,
+		bloc_name,
+		bloc_name,
+		bloc_name,
+		bloc_name,
+		bloc_name,
+		bloc_name
+	)
 
-    return template
+	return template
 end
 
 bloc.create_cubit_state_template = function(bloc_name)
-    local snake_case_name = util.camel_to_snake(bloc_name)
+	local snake_case_name = util.camel_to_snake(bloc_name)
 
-    local template = string.format(
-        [[
+	local template = string.format(
+		[[
 part of '%s_cubit.dart';
 
 sealed class %sState extends Equatable {
@@ -126,15 +126,14 @@ sealed class %sState extends Equatable {
 
 final class %sInitial extends %sState {}
 ]],
-        snake_case_name,
-        bloc_name,
-        bloc_name,
-        bloc_name,
-        bloc_name
-    )
+		snake_case_name,
+		bloc_name,
+		bloc_name,
+		bloc_name,
+		bloc_name
+	)
 
-    return template
+	return template
 end
-
 
 return bloc
