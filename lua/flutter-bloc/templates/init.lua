@@ -34,8 +34,9 @@ class %sBloc extends Bloc<%sEvent, %sState> {
 	return template
 end
 
-bloc.create_event_template = function(bloc_name)
-	local snake_case_name = util.camel_to_snake(bloc_name)
+bloc.create_event_template = function(bloc_candidate_name)
+	local snake_case_name = util.camel_to_snake(bloc_candidate_name)
+	local bloc_name = util.init_cap(bloc_candidate_name)
 
 	local template = string.format(
 		[[
@@ -56,8 +57,9 @@ sealed class %sEvent extends Equatable {
 	return template
 end
 
-bloc.create_bloc_state_template = function(bloc_name)
-	local snake_case_name = util.camel_to_snake(bloc_name)
+bloc.create_bloc_state_template = function(bloc_candidate_name)
+	local snake_case_name = util.camel_to_snake(bloc_candidate_name)
+	local bloc_name = util.init_cap(bloc_candidate_name)
 
 	local template = string.format(
 		[[
@@ -83,9 +85,9 @@ final class %sInitial extends %sState {}
 end
 
 -- Cubit templates
-bloc.create_cubit_template = function(bloc_name)
-	local snake_case_name = util.camel_to_snake(bloc_name)
-
+bloc.create_cubit_template = function(bloc_candidate_name)
+	local snake_case_name = util.camel_to_snake(bloc_candidate_name)
+local bloc_name = util.init_cap(bloc_candidate_name)
 	local template = string.format(
 		[[
 import 'package:equatable/equatable.dart';
